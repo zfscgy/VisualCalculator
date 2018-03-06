@@ -1,0 +1,15 @@
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.csprojResolveAssemblyReference.cache
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\MainWindow.g.cs
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\App.g.cs
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator_MarkupCompile.cache
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator_MarkupCompile.lref
+D:\MyDoc\C#\Calculator\Calculator\bin\Debug\Calculator.exe.config
+D:\MyDoc\C#\Calculator\Calculator\bin\Debug\Calculator.exe
+D:\MyDoc\C#\Calculator\Calculator\bin\Debug\Calculator.pdb
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\MainWindow.baml
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.g.resources
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.Properties.Resources.resources
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.csproj.GenerateResource.Cache
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.exe
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.pdb
