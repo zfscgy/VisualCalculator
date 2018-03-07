@@ -38,10 +38,16 @@ namespace Calculator
             OutputBox.Text = result;
         }
 
+        private bool lastChangeIsAuto = false;
         private void InputBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (InputBox.Text.Length > lastLength)
+            if(lastChangeIsAuto)
             {
+                lastChangeIsAuto = false;
+            }
+            else if (InputBox.Text.Length > lastLength)
+            {
+                lastChangeIsAuto = true;
                 string tail = completor.Completion(InputBox.Text.Substring(InputBox.Text.Length - 1));
                 InputBox.Text += tail;
                 InputBox.SelectionStart = InputBox.Text.Length;

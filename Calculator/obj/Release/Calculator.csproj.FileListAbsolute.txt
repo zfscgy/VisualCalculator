@@ -1,0 +1,14 @@
+D:\MyDoc\C#\Calculator\Calculator\bin\Release\Calculator.exe.config
+D:\MyDoc\C#\Calculator\Calculator\bin\Release\Calculator.exe
+D:\MyDoc\C#\Calculator\Calculator\bin\Release\Calculator.pdb
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\MainWindow.g.cs
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\App.g.cs
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\Calculator_MarkupCompile.cache
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\Calculator_MarkupCompile.lref
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\MainWindow.baml
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\Calculator.g.resources
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\Calculator.Properties.Resources.resources
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\Calculator.csproj.GenerateResource.Cache
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\Calculator.csproj.CoreCompileInputs.cache
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\Calculator.exe
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\Calculator.pdb

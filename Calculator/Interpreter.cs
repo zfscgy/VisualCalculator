@@ -85,6 +85,19 @@ namespace Calculator
                     {
                         Sequence[seqIndex++] = var;
                     }
+                    else if(exprString[i] == 'i')
+                    {
+                        if (exprString[i + 1] == 'n' && exprString[i + 2] == 't')
+                        {
+                            Sequence[seqIndex++] = new Element(Token.Int);
+                            i += 2;
+                        }
+                        else
+                        {
+                            Sequence[seqIndex++] = new Element(Token.Null);
+                            return Sequence;
+                        }
+                    }
                     else
                     {
                         Sequence[seqIndex++] = new Element(Token.Null);
@@ -126,6 +139,7 @@ namespace Calculator
         Cos,
         Sin,
         Tan,
+        Int,
 
         Pi,
         E,
@@ -163,7 +177,7 @@ namespace Calculator
 
     public class Interpreter
     {
-        public double intPrecision = 10000;
+        public double intPrecision = 100000;
 
         Element[] Sequence;
         int index;
@@ -193,6 +207,10 @@ namespace Calculator
                 index++;
                 value = Math.Cos(Prime());
             }
+            else if(Sequence[index].token == Token.Int)
+            {
+                value = Integral();
+            }
             else
             {               
                 value = Sequence[index].val;
@@ -200,20 +218,31 @@ namespace Calculator
             }
             return value;
         }
-        double Product()
+        double Power()
         {
             double val = Prime();
+            while (Sequence[index].token == Token.Pow)
+            {
+                Token op = Sequence[index].token;
+                index++;
+                val = Math.Pow(val, Prime());
+            }
+            return val;
+        }
+        double Product()
+        {
+            double val = Power();
             while(Sequence[index].token == Token.Mul || Sequence[index].token == Token.Div)
             {
                 Token op = Sequence[index].token;
                 index++;
                 if(op == Token.Mul)
                 {
-                    val *= Prime();
+                    val *= Power();
                 }
                 else
                 {
-                    val /= Prime();
+                    val /= Power();
                 }
             }
             return val;
@@ -268,7 +297,7 @@ namespace Calculator
                 }
             }
             int currentIndex = index;
-            double incremental = upperBound - lowerBound;
+            double incremental = (upperBound - lowerBound)/intPrecision;
             double integral = 0;
             for(varX.val = lowerBound; varX.val < upperBound; varX.val += incremental)
             {
