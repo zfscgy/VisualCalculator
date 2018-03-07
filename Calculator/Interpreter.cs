@@ -13,6 +13,7 @@ namespace Calculator
         {
             Element[] Sequence = new Element[maxLength];
             int seqIndex = 0;
+            Element var = new Element(Token.Variable);
             for(int i = 0; i< exprString.Length; i++)
             {
                 if (exprString[i] <= '9' && exprString[i] >= '0')
@@ -37,23 +38,57 @@ namespace Calculator
                 }
                 else if (exprString[i] <= 'z' && exprString[i] >= 'a')
                 {
-                    if(exprString[i] == 'p')
+                    if(exprString[i] == 'p') //pi
                     {
                         i++;
-                        if(exprString[i] == i)
+                        if(exprString[i] == 'i')
                         {
                             Sequence[seqIndex++] = new Element(Token.Pi,Math.PI);
-                            i++;
                         }
                         else
                         {
+                            Sequence[seqIndex++] = new Element(Token.Null);
                             return Sequence;
                         }
                     }
-                    else if(exprString[i] == 'e')
+                    else if(exprString[i] == 'e') //e
                     {
                         Sequence[seqIndex++] = new Element(Token.E, Math.E);
-                        i++;
+                    }
+                    else if(exprString[i] == 'c') // cos
+                    {
+                        if(exprString[i+ 1] == 'o' && exprString[i+2] == 's')
+                        {
+                            Sequence[seqIndex++] = new Element(Token.Cos);
+                            i+=2;
+                        }
+                        else
+                        {
+                            Sequence[seqIndex++] = new Element(Token.Null);
+                            return Sequence;
+                        }
+                    }
+                    else if(exprString[i] == 's') //sin
+                    {
+                        if (exprString[i + 1] == 'i' && exprString[i + 2] == 'n')
+                        {
+                            Sequence[seqIndex++] = new Element(Token.Sin);
+                            i += 2;
+                        }
+                        else
+                        {
+                            Sequence[seqIndex++] = new Element(Token.Null);
+                            return Sequence;
+                        }
+                    }
+                    else if(exprString[i] == 'x') //x
+                    {
+                        Sequence[seqIndex++] = var;
+                    }
+                    else
+                    {
+                        Sequence[seqIndex++] = new Element(Token.Null);
+                        return Sequence;
                     }
                 }
                 else
@@ -67,6 +102,7 @@ namespace Calculator
                         case '^': Sequence[seqIndex++] = new Element(Token.Pow); break;
                         case '(': Sequence[seqIndex++] = new Element(Token.Lparen); break;
                         case ')': Sequence[seqIndex++] = new Element(Token.Rparen); break;
+                        case ',': Sequence[seqIndex++] = new Element(Token.Comma); break;
                         default: Sequence[seqIndex++] = new Element(Token.Null); return Sequence;
                     }
                 }
@@ -96,7 +132,9 @@ namespace Calculator
 
         Lparen,
         Rparen,
+        Comma,
 
+        Variable,
         Terminate,
         Null,
     }
@@ -125,11 +163,17 @@ namespace Calculator
 
     public class Interpreter
     {
+        public double intPrecision = 10000;
+
         Element[] Sequence;
         int index;
         double Prime()
         {
             double value;
+            if(Sequence[index].token == Token.Null)
+            {
+                return 0;
+            }
             if(Sequence[index].token == Token.Lparen)
             {
                 index++;
@@ -139,11 +183,21 @@ namespace Calculator
                     throw new InterpreteException("Parens not match!");
                 }
             }
-            else
+            else if(Sequence[index].token == Token.Sin)
             {
-                value = Sequence[index].val;
+                index++;
+                value = Math.Sin(Prime());
             }
-            index++;
+            else if(Sequence[index].token == Token.Cos)
+            {
+                index++;
+                value = Math.Cos(Prime());
+            }
+            else
+            {               
+                value = Sequence[index].val;
+                index++;
+            }
             return value;
         }
         double Product()
@@ -182,7 +236,53 @@ namespace Calculator
             }
             return val;
         }
-
+        double Integral()
+        {
+            double lowerBound;
+            double upperBound;
+            Element varX = new Element();
+            index++;
+            if(Sequence[index].token!= Token.Lparen)
+            {
+                return 0;
+            }
+            index++;
+            lowerBound = Expr();
+            if (Sequence[index].token != Token.Comma)
+            {
+                return 0;
+            }
+            index++;
+            upperBound = Expr();
+            if (Sequence[index].token != Token.Comma)
+            {
+                return 0;
+            }
+            index++;
+            for(int i = index; Sequence[index].token != Token.Rparen && index < Sequence.Length; i++)
+            {
+                if(Sequence[index].token == Token.Variable)
+                {
+                    varX = Sequence[index];
+                    break;
+                }
+            }
+            int currentIndex = index;
+            double incremental = upperBound - lowerBound;
+            double integral = 0;
+            for(varX.val = lowerBound; varX.val < upperBound; varX.val += incremental)
+            {
+                integral += Expr() * incremental;
+                index = currentIndex;
+            }
+            Expr();
+            if(Sequence[index].token != Token.Rparen)
+            {
+                return integral;
+            }
+            index++;
+            return integral;
+        }
         public double Interprete(Element[] _Sequence)
         {
             index = 0;
