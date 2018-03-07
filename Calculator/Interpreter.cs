@@ -288,11 +288,11 @@ namespace Calculator
                 return 0;
             }
             index++;
-            for(int i = index; Sequence[index].token != Token.Rparen && index < Sequence.Length; i++)
+            for(int i = index; i < Sequence.Length; i++)
             {
-                if(Sequence[index].token == Token.Variable)
+                if(Sequence[i].token == Token.Variable)
                 {
-                    varX = Sequence[index];
+                    varX = Sequence[i];
                     break;
                 }
             }
