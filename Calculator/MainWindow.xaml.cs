@@ -34,7 +34,7 @@ namespace Calculator
         {
             Parser parser = new Parser();
             Interpreter interpreter = new Interpreter();
-            string result = interpreter.Interprete(parser.Parse(InputBox.Text)).ToString();
+            string result = interpreter.Interprete(parser.Parse(InputBox.Text.Trim())).ToString();
             OutputBox.Text = result;
         }
 
@@ -43,16 +43,24 @@ namespace Calculator
         {
             if(lastChangeIsAuto)
             {
-                lastChangeIsAuto = false;
+                lastLength = InputBox.Text.Length;
+                return;
             }
             else if (InputBox.Text.Length > lastLength)
             {
                 lastChangeIsAuto = true;
-                string tail = completor.Completion(InputBox.Text.Substring(InputBox.Text.Length - 1));
-                InputBox.Text += tail;
-                InputBox.SelectionStart = InputBox.Text.Length;
+                int selection = InputBox.SelectionStart;
+                string tail = completor.Completion(InputBox.Text.Substring(selection - 1,1));
+                InputBox.Text = InputBox.Text.Insert(selection,tail);
+                InputBox.SelectionStart = selection + tail.Length;
+                lastChangeIsAuto = false;
             }
             lastLength = InputBox.Text.Length;
+        }
+
+        private void InputBox_KeyDown(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }

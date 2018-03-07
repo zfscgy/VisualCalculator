@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="计算器" Height="350" Width="525">
     <Grid Margin="0,40,0,0">
-        <TextBox x:Name="InputBox" Height="35" Margin="20,19,19.222,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" TextChanged="InputBox_TextChanged"/>
+        <TextBox x:Name="InputBox" Height="35" Margin="20,19,19.222,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" TextChanged="InputBox_TextChanged" KeyDown="InputBox_KeyDown"/>
         <Button x:Name="CalcButton" Content="计算" HorizontalAlignment="Left" Margin="30,80,0,0" VerticalAlignment="Top" Width="75" Height="35" FontSize="20" Click="CalcButton_Click"/>
         <TextBox x:Name="OutputBox" Height="35" Margin="20,140,20,20" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20"/>
         <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="100" Margin="1,470,0,-290" Stroke="Black" VerticalAlignment="Top" Width="100"/>
