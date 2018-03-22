@@ -13,3 +13,5 @@ D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.csproj.GenerateResource.C
 D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
 D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.exe
 D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.pdb
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\CalculatorSettings.g.cs
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\CalculatorSettings.baml
