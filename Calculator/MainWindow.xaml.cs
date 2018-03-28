@@ -30,13 +30,14 @@ namespace Calculator
         public MainWindow()
         {
             InitializeComponent();
-
+            //窗口生成的时候实例化一个编译器和设置类
             interpreter = new Interpreter(this);
             calculatorSettings = new CalculatorSettings(interpreter);
         }
 
         private void CalcButton_Click(object sender, RoutedEventArgs e)
         {
+            //如果正在计算，则不进行操作
             if(isCalculating)
             {
                 return;
@@ -50,8 +51,14 @@ namespace Calculator
         }
 
         private bool IgnoreChange = false;
+        //当检测到有在输入框有输入时立刻进行词法分析，同时进行自动补全操作。
         private void InputBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if(InputBox.Text == "gpa")
+            {
+                new GPAList().Show();
+            }
+
             TextBox_ErrorOuput.Text = "";
             if(IgnoreChange)
             {
@@ -82,7 +89,6 @@ namespace Calculator
                     CalcButton_Click(sender, e);
                 }
             }
-
         }
 
         private void Button_Symbols_Click(object sender, RoutedEventArgs e)
@@ -133,7 +139,7 @@ namespace Calculator
                     InputBox.Text = InputBox.Text.Insert(lastComplete + 1, symbolString);
                 }
                 InputBox.Focus();
-                InputBox.SelectionStart = index + symbolString.Length;
+                InputBox.SelectionStart = index + symbolString.Length - 1;
                 IgnoreChange = false;
                 parser.Parse(InputBox.Text, InputBox.SelectionStart, out int lastMatchedIndex);
                 SetListbox(lastMatchedIndex + 1);
@@ -158,7 +164,7 @@ namespace Calculator
 
         private void FinishCalc(double result)
         {
-            OutputBox.Text = result.ToString();
+            OutputBox.Text = result.ToString("f10");
             TextBox_ErrorOuput.Text += interpreter.errorMessage;
             isCalculating = false;
         }
@@ -172,6 +178,13 @@ namespace Calculator
         {
             interpreter.StopCalc();
             isCalculating = false;
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            interpreter.StopCalc();
+            base.OnClosed(e);
+
         }
     }
 }

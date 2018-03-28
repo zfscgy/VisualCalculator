@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="计算器" Height="500" Width="535" ResizeMode="NoResize">
+        Title="计算器" Height="500" Width="555" ResizeMode="NoResize">
 
     <Grid Margin="0,0,0,0">
         <Menu Height="30" Margin="0,0,0,0" VerticalAlignment="Top">
@@ -22,29 +22,39 @@
                 <ListBox x:Name="AutoCompleteBox" Height="70"  Width="150" Margin="5,10,5,0" DockPanel.Dock="Left" KeyDown="AutoCompleteBox_KeyDown"/>
 
             </DockPanel>
-            <WrapPanel  DockPanel.Dock="Top" Height="100">
-                <Button x:Name="Button_Calc" Content="计算"  Margin="10,10,0,0" Width="75" Height="25" FontSize="14" Click="CalcButton_Click" Background="#FFDDDDDD"/>
-                <Button x:Name="Button_Add" Content="+" Margin="10,10,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
-                <Button x:Name="Button_Sub" Content="-" Margin="10,10,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
-                <Button x:Name="Button_Mul" Content="×" Margin="10,10,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
-                <Button x:Name="Button_Div" Content="/" Margin="10,10,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
-                <Button x:Name="Button_Pow" Content="^" Margin="10,10,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
-                <Button x:Name="Button_Sin" Content="sin" Margin="10,10,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
-                <Button x:Name="Button_Cos" Content="cos" Margin="10,10,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
-                <Button x:Name="Button_Int" Content="int" Margin="10,10,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
-                <Button x:Name="Button_Diff" Content="d/dx" Margin="10,10,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
-                <Button x:Name="Button_Pi" Content="π" Margin="10,10,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
-                <Button x:Name="Button_E" Content="e" Margin="10,10,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+            <WrapPanel Margin="2,10,2,10"  DockPanel.Dock="Top" Height="100">
+                <Button x:Name="Button_Calc" Content="计算"  Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="CalcButton_Click" Background="#FFDDDDDD"/>
+                <Button x:Name="Button_Add" Content="+" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Sub" Content="-" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Mul" Content="×" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Div" Content="/" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Pow" Content="^" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Sqrt" Content="sqrt" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Sh" Content="sh" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Ch" Content="ch" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Ln" Content="ln" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Log" Content="log" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Sin" Content="sin" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Cos" Content="cos" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Tan" Content="tan" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_ArcSin" Content="arcsin" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_ArcCos" Content="arccos" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_ArcTan" Content="arctan" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Sum" Content="sum" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Int" Content="int" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Diff" Content="d/dx" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_Pi" Content="π" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
+                <Button x:Name="Button_E" Content="e" Margin="0,0,0,0" Width="75" Height="25" FontSize="14" Click="Button_Symbols_Click"/>
             </WrapPanel>
 
-            <TextBox x:Name="OutputBox" Height="35" Margin="10,10,10,10" DockPanel.Dock="Top" TextWrapping="Wrap" FontSize="20"/>
+            <TextBox x:Name="OutputBox" Height="35" Margin="10,10,10,10" DockPanel.Dock="Top" TextWrapping="Wrap" FontSize="20" IsReadOnly="True"/>
             <Canvas Height="200" DockPanel.Dock="Bottom" Margin="0,0,0,0" VerticalAlignment="Top">
                 <TextBlock Height="20" Width="50" Margin="10,0,0,0" TextWrapping="Wrap" Text="错误列表" Canvas.Left="10"/>
                 <ScrollViewer Height="140" Width="300" Margin="10,0,10,10" Canvas.Top="30">
-                    <TextBox x:Name="TextBox_ErrorOuput"/>
+                    <TextBox x:Name="TextBox_ErrorOuput" IsReadOnly="True"/>
                 </ScrollViewer>
                 <ProgressBar x:Name="ProgressBar_Calc" Height="15" Width="175" Canvas.Left="320"/>
-                <TextBox x:Name="TextBox_Status" Height="140" Canvas.Left="320" TextWrapping="Wrap" Canvas.Top="30" Width="175"/>
+                <TextBox x:Name="TextBox_Status" Height="140" Canvas.Left="320" TextWrapping="Wrap" Canvas.Top="30" Width="175" IsReadOnly="True"/>
                 <Button x:Name="Button_Stop" Content="x" Canvas.Left="500" Canvas.Top="0" Width="21"  Height="15" FontSize="8" Click="Button_Stop_Click"/>
             </Canvas>
 

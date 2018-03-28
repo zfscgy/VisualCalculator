@@ -12,3 +12,8 @@ D:\MyDoc\C#\Calculator\Calculator\obj\Release\Calculator.csproj.GenerateResource
 D:\MyDoc\C#\Calculator\Calculator\obj\Release\Calculator.csproj.CoreCompileInputs.cache
 D:\MyDoc\C#\Calculator\Calculator\obj\Release\Calculator.exe
 D:\MyDoc\C#\Calculator\Calculator\obj\Release\Calculator.pdb
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\CalculatorSettings.g.cs
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\GPAList.g.cs
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\CalculatorSettings.baml
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\GPAList.baml
+D:\MyDoc\C#\Calculator\Calculator\obj\Release\Calculator.csprojResolveAssemblyReference.cache
