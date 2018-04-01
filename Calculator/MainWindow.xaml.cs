@@ -21,32 +21,170 @@ namespace Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        private AutoCompletor completor;
         private int lastLength = 0;
+        Parser parser = new Parser();
+        Interpreter interpreter;
+        CalculatorSettings calculatorSettings;
+
+        private bool isCalculating = false;
         public MainWindow()
         {
-            completor = new AutoCompletor();
             InitializeComponent();
-
+            //窗口生成的时候实例化一个编译器和设置类
+            interpreter = new Interpreter(this);
+            calculatorSettings = new CalculatorSettings(interpreter);
         }
 
         private void CalcButton_Click(object sender, RoutedEventArgs e)
         {
-            Parser parser = new Parser();
-            Interpreter interpreter = new Interpreter();
-            string result = interpreter.Interprete(parser.Parse(InputBox.Text)).ToString();
-            OutputBox.Text = result;
+            //如果正在计算，则不进行操作
+            if(isCalculating)
+            {
+                return;
+            }
+            isCalculating = true;
+            OutputBox.Text = "";
+            TextBox_Status.Text = "";
+            interpreter.StartCalc(parser.Parse(InputBox.Text, InputBox.Text.Length, out int stoppedIndex));
+            InputBox.SelectionStart = stoppedIndex + 1;
+            TextBox_ErrorOuput.Text = parser.parser_error;
         }
 
+        private bool IgnoreChange = false;
+        //当检测到有在输入框有输入时立刻进行词法分析，同时进行自动补全操作。
         private void InputBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (InputBox.Text.Length > lastLength)
+            if(InputBox.Text == "gpa")
             {
-                string tail = completor.Completion(InputBox.Text.Substring(InputBox.Text.Length - 1));
-                InputBox.Text += tail;
-                InputBox.SelectionStart = InputBox.Text.Length;
+                new GPAList().Show();
             }
-            lastLength = InputBox.Text.Length;
+
+            TextBox_ErrorOuput.Text = "";
+            if(IgnoreChange)
+            {
+                return;
+            }
+            int lastMatchedIndex = 0;
+            parser.Parse(InputBox.Text, InputBox.SelectionStart, out lastMatchedIndex);
+            SetListbox(lastMatchedIndex + 1);
+            TextBox_ErrorOuput.Text += parser.parser_error;
+        }
+
+        #region Click Methods
+        private int lastSelectionStart;
+        private void InputBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            lastSelectionStart = InputBox.SelectionStart;
+            if(e.Key == Key.Enter)
+            {
+                if (AutoCompleteBox.Items.Count != 0)
+                {
+                    if (AutoCompleteBox.Focus())
+                    {
+                        AutoCompleteBox.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    CalcButton_Click(sender, e);
+                }
+            }
+        }
+
+        private void Button_Symbols_Click(object sender, RoutedEventArgs e)
+        {
+            IgnoreChange = true;
+            int index = InputBox.SelectionStart;
+            string symbolString = Symbols.ButtonNameToSymbol[((Button)sender).Name];
+            InputBox.Focus();
+            InputBox.Text = InputBox.Text.Insert(index, symbolString);
+            InputBox.SelectionStart = index + symbolString.Length;
+            IgnoreChange = false;
+        }
+
+        #endregion
+        private int lastMatched;
+        private int lastComplete;
+        private void SetListbox(int index)
+        {
+            lastComplete = index - 1;
+            AutoCompleteBox.Items.Clear();
+            List<string> list = Symbols.LongestMatch(InputBox.Text, index, InputBox.SelectionStart, out lastMatched);
+            if (lastMatched == InputBox.SelectionStart - 1)
+            {
+                foreach (string s in list)
+                {
+                    ListBoxItem item = new ListBoxItem();
+                    item.Content = s;
+                    AutoCompleteBox.Items.Add(item);
+                }
+            }
+        }
+
+        private void AutoCompleteBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                IgnoreChange = true;
+                int index = InputBox.SelectionStart;
+                string symbolString = (string)((ListBoxItem)((ListBox)sender).SelectedItem).Content;
+                InputBox.Text = InputBox.Text.Substring(0, lastComplete + 1) + InputBox.Text.Substring(index);
+
+                if (lastComplete + 1 == InputBox.Text.Length)
+                {
+                    InputBox.Text += symbolString;
+                }
+                else
+                {
+                    InputBox.Text = InputBox.Text.Insert(lastComplete + 1, symbolString);
+                }
+                InputBox.Focus();
+                InputBox.SelectionStart = index + symbolString.Length - 1;
+                IgnoreChange = false;
+                parser.Parse(InputBox.Text, InputBox.SelectionStart, out int lastMatchedIndex);
+                SetListbox(lastMatchedIndex + 1);
+
+            }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            calculatorSettings.Show();
+        }
+
+        public void UpdateProgressBar(byte act)
+        {
+            this.Dispatcher.Invoke(new Action(() => { if (act == 1) ProgressBar_Calc.Value++; else ProgressBar_Calc.Value = 0; }));
+        }
+
+        public void UpdateStatusText(string text)
+        {
+            this.Dispatcher.Invoke(new Action(() => { TextBox_Status.Text += text; }));
+        }
+
+        private void FinishCalc(double result)
+        {
+            OutputBox.Text = result.ToString("f10");
+            TextBox_ErrorOuput.Text += interpreter.errorMessage;
+            isCalculating = false;
+        }
+
+        public void WorkDone(double result)
+        {
+            this.Dispatcher.Invoke(new Action(() => { FinishCalc(result); }));
+        }
+
+        private void Button_Stop_Click(object sender, RoutedEventArgs e)
+        {
+            interpreter.StopCalc();
+            isCalculating = false;
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            interpreter.StopCalc();
+            base.OnClosed(e);
+
         }
     }
 }

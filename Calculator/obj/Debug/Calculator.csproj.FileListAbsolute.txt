@@ -1,4 +1,3 @@
-D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.csprojResolveAssemblyReference.cache
 D:\MyDoc\C#\Calculator\Calculator\obj\Debug\MainWindow.g.cs
 D:\MyDoc\C#\Calculator\Calculator\obj\Debug\App.g.cs
 D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator_MarkupCompile.cache
@@ -13,3 +12,8 @@ D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.csproj.GenerateResource.C
 D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.csproj.CoreCompileInputs.cache
 D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.exe
 D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.pdb
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\CalculatorSettings.g.cs
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\CalculatorSettings.baml
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\GPAList.g.cs
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\GPAList.baml
+D:\MyDoc\C#\Calculator\Calculator\obj\Debug\Calculator.csprojResolveAssemblyReference.cache
